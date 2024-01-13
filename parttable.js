@@ -227,6 +227,43 @@ class PartTable {
 
     this.save();
   }
+
+  moveRowUp(row) {
+    const pos = this.rows.indexOf(row);
+    if (pos < 7) {
+      return;
+    }
+    const other = this.rows[pos - 1];
+    other.row.before(row.row);
+    this.rows[pos] = other;
+    this.rows[pos - 1] = row;
+    this.save();
+  }
+
+  moveRowDown(row) {
+    const pos = this.rows.indexOf(row);
+    if (pos < 0) {
+      return;
+    }
+    const other = this.rows[pos + 1];
+    if (!other) {
+      return;
+    }
+    other.row.after(row.row);
+    this.rows[pos] = other;
+    this.rows[pos + 1] = row;
+    this.save();
+  }
+
+  deleteRow(row) {
+    const pos = this.rows.indexOf(row);
+    if (pos < 7) {
+      return;
+    }
+    row.row.remove();
+    this.rows.splice(pos, 1);
+    this.update();
+  }
 }
 
 const partTable = new PartTable();

@@ -2,6 +2,11 @@ import { allParts, partsByType, fixedParts } from './data.js';
 import ui, { H } from './ui.js';
 import partTable from './parttable.js';
 
+const upArrow = '<a class="icon up" title="Move Up">&#x2b06;&#xfe0f;</a>';
+const downArrow = '<a class="icon down" title="Move Down">&#x2b07;&#xfe0f;</a>';
+const delButton = '<a class="icon del" title="Delete">&#x274c;</a>';
+const searchButton = '<a class="icon search" title="Search">&#x1f50d;</a>';
+
 const topSpeeds = {
   'White Dwarf 3015': 180,
   A: 150,
@@ -31,6 +36,7 @@ export default class PartRow {
   constructor(partType = null) {
     this.update = this.update.bind(this);
     this._fillNames = this._fillNames.bind(this);
+    this._onIconClicked = this._onIconClicked.bind(this);
 
     const select = document.createElement('select');
     select.className = 'partName';
@@ -57,12 +63,18 @@ export default class PartRow {
       partHeader.addEventListener('change', this._fillNames);
     }
 
-    const cells = [ H('th', partHeader) ];
-    this.nameCell = H({ tag: 'td', className: 'partName' }, select);
-    cells.push(this.nameCell);
+    const icons = H({ tag: 'td', className: 'icons' });
+    this._info = H({ tag: 'a', className: 'icon', title: 'Part Info' }, '\u{1f6c8}'),
+    icons.addEventListener('click', this._onIconClicked);
+    this._info.addEventListener('click', this._onIconClicked);
+    this.nameCell = H({ tag: 'td', className: 'partName' }, [ select, this._info ]);
+
+    const cells = [ icons, H('th', partHeader), this.nameCell ];
     if (fixedParts.includes(partType)) {
+      icons.innerHTML = searchButton;
       this.nameCell.colSpan = 2;
     } else {
+      icons.innerHTML = upArrow + downArrow + delButton + searchButton;
       this._qty = H({
         tag: 'input',
         type: 'number',
@@ -208,6 +220,19 @@ export default class PartRow {
 
     if (this._init) {
       partTable.update();
+    }
+  }
+
+  _onIconClicked(event) {
+    if (!event.target.classList.contains('icon')) {
+      return;
+    }
+    event.preventDefault();
+    const button = event.target.className.replace('icon ', '');
+    switch (button) {
+      case 'up': return partTable.moveRowUp(this);
+      case 'down': return partTable.moveRowDown(this);
+      case 'del': return partTable.deleteRow(this);
     }
   }
 }

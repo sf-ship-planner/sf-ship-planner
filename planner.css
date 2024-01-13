@@ -1,10 +1,18 @@
+html, body, input, select {
+  font-family: Noto Sans, Arial, sans-serif;
+}
+
+html, body {
+  font-size: 14px;
+}
+
 table {
   background-color: #808080;
 }
 
 td, th {
   background-color: #ffffff;
-  height: 1.3em;
+  height: 22px;
   text-wrap: nowrap;
 }
 
@@ -22,15 +30,19 @@ tfoot th {
 }
 
 select {
+  font-size: 13px;
   width: 100%;
 }
 
 select.partName {
   min-width: 300px;
+  width: calc(100% - 16px);
 }
 
 input[type=number] {
-  width: calc(100% - 8px);
+  font-size: 13px;
+  width: 5em;
+  height: 16px;
 }
 
 input[type=number].qty {
@@ -40,7 +52,7 @@ input[type=number].qty {
 
 .value, .mass, .hull, .thrust, .capacity, .power {
   text-align: right;
-  min-width: 4em;
+  min-width: 3em;
 }
 
 .thrust {
@@ -53,7 +65,7 @@ input[type=number].qty {
 
 .totals td {
   text-align: right;
-  min-width: 4em;
+  min-width: 5em;
 }
 
 .mainTableContainer {
@@ -61,6 +73,10 @@ input[type=number].qty {
 
 .filters {
   margin: 0.5em 0;
+}
+
+input[type=checkbox] {
+  vertical-align: top;
 }
 
 .good td {
@@ -103,4 +119,26 @@ input[type=number].qty {
 
 ul {
   margin: 0;
+}
+
+.icons {
+  text-align: right;
+}
+
+a.icon {
+  background: white;
+  display: inline-block;
+  margin: 0 0 0 0;
+  padding: 0 0 0 2px;
+  font-size: 14px;
+  height: 14px;
+  cursor: pointer;
+  color: blue;
+}
+
+tr:nth-of-type(7) a.icon.up,
+tr:nth-last-of-type(2) a.icon.down,
+tr:last-of-type .icons a.icon {
+  visibility: hidden;
+  cursor: auto;
 }
