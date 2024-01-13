@@ -1,4 +1,4 @@
-import { fixedParts, weaponTypes } from './data.js';
+import { allParts, fixedParts, weaponTypes } from './data.js';
 import ui from './ui.js';
 import PartRow from './partrow.js';
 import * as formulas from './formulas.js';
@@ -39,6 +39,14 @@ class PartTable {
     ui.targetGravRange.addEventListener('change', this.update);
     ui.targetSpeed.addEventListener('change', this.update);
     ui.targetMobility.addEventListener('change', this.update);
+
+    this.updateFilters = this.updateFilters.bind(this, null);
+    ui.filterA.addEventListener('click', this.updateFilters);
+    ui.filterB.addEventListener('click', this.updateFilters);
+    ui.filterC.addEventListener('click', this.updateFilters);
+    ui.filterLevel.addEventListener('change', this.updateFilters);
+    ui.filterDesign.addEventListener('change', this.updateFilters);
+    ui.filterPiloting.addEventListener('change', this.updateFilters);
   }
 
   init() {
@@ -263,6 +271,29 @@ class PartTable {
     row.row.remove();
     this.rows.splice(pos, 1);
     this.update();
+  }
+
+  updateFilters(onlyRow = null) {
+    const hide = {
+      A: !ui.filterA.checked,
+      B: !ui.filterB.checked,
+      C: !ui.filterC.checked,
+    };
+    const level = Number(ui.filterLevel.value || 60);
+    const design = Number(ui.filterDesign.value || 4);
+    const piloting = Number(ui.filterPiloting.value || 4);
+    const rows = onlyRow ? [onlyRow] : this.rows;
+    for (const row of rows) {
+      const currentPart = row.partName;
+      for (const opt of row._partName.options) {
+        const part = allParts[opt.value] || {};
+        const unavailable = part.level > level || part.design > design || part.piloting > piloting;
+        opt.disabled = unavailable || hide[part.class];
+        if (opt.value === currentPart) {
+          row._partName.classList.toggle('caution', unavailable);
+        }
+      }
+    }
   }
 }
 

@@ -50,6 +50,14 @@ input[type=number].qty {
   margin-left: 2px;
 }
 
+input#filterDesign, input#filterPiloting {
+  width: 2em;
+}
+
+input#filterLevel {
+  width: 3em;
+}
+
 .value, .mass, .hull, .thrust, .capacity, .power {
   text-align: right;
   min-width: 3em;

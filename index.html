@@ -91,6 +91,13 @@
     <label for='filterA'><input type='checkbox' id='filterA' checked />A</label> &middot;
     <label for='filterB'><input type='checkbox' id='filterB' checked />B</label> &middot;
     <label for='filterC'><input type='checkbox' id='filterC' checked />C</label>
+    &bull;
+    <b>Filter by Skill:</b>
+    <label for='filterDesign'>Design: <input id='filterDesign' type='number' min='0' max='4' value='4' /></label> &middot;
+    <label for='filterPiloting'>Piloting: <input id='filterPiloting' type='number' min='0' max='4' value='4' /></label>
+    &bull;
+    <b>Filter by Level:</b>
+    <input id='filterLevel' type='number' min='1' value='60' />
   </div>
   <table class='mainTableContainer' cellspacing='1' cellpadding='2'>
     <thead>
@@ -111,10 +118,10 @@
   <h3>Credits</h3>
   Data collected from:
   <ul>
-    <li><a href='https://inara.cz/starfield/'>Inara Starfield Database</a></li>
     <li><a href='https://www.reddit.com/r/Starfield/comments/16gqwce/ship_part_list_with_level_requirements_stats/'>Lucid Wolf's Ship Part List</a></li>
     <li><a href='https://www.reddit.com/r/Starfield/comments/1738yde/ship_planning_made_easier/'>Nebur Wolf's Ship Designer</a></li>
     <li><a href='https://www.reddit.com/r/Starfield/comments/17bkze8/comprehensive_ship_parts/'>gfntyjzpirqf's Starfield Ship Parts</a></li>
+    <li><a href='https://inara.cz/starfield/'>Inara Starfield Database</a></li>
   </ul>
 </body>
 <script type='module' src='planner.js'></script>

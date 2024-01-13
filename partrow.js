@@ -14,24 +14,6 @@ const topSpeeds = {
   C: 130,
 };
 
-function updateFilters(select) {
-  const hide = {
-    A: !ui.filterA.checked,
-    B: !ui.filterB.checked,
-    C: !ui.filterC.checked,
-  };
-  const selects = (select && select.tagName === 'SELECT') ? [select] : [...document.querySelectorAll('select.partName')];
-  for (const sel of selects) {
-    for (const opt of sel.options) {
-      opt.hidden = hide[opt.reactorClass];
-    }
-  }
-}
-
-ui.filterA.addEventListener('click', updateFilters);
-ui.filterB.addEventListener('click', updateFilters);
-ui.filterC.addEventListener('click', updateFilters);
-
 export default class PartRow {
   constructor(partType = null) {
     this.update = this.update.bind(this);
@@ -81,7 +63,6 @@ export default class PartRow {
         className: 'qty',
         value: 1,
         min: 1,
-        max: 6,
       });
       cells.push(H('td', ['x', this._qty]));
       this._qty.addEventListener('change', this.update);
@@ -175,13 +156,12 @@ export default class PartRow {
       opt.value = opt.text = name;
       const part = allParts[name];
       if (part && part.class) {
-        opt.reactorClass = part.class;
         opt.text = `${name} (${part.class})`;
       }
       options.add(opt);
     }
     this.update();
-    updateFilters(this._partName);
+    partTable.updateFilters(this);
   }
 
   _updateField(field, value = null) {
