@@ -1,0 +1,106 @@
+table {
+  background-color: #808080;
+}
+
+td, th {
+  background-color: #ffffff;
+  height: 1.3em;
+  text-wrap: nowrap;
+}
+
+thead, thead th, tr.subhead th {
+  background-color: #c0c0c0;
+  text-align: center;
+}
+
+tbody th {
+  text-align: left;
+}
+
+tfoot th {
+  text-align: right;
+}
+
+select {
+  width: 100%;
+}
+
+select.partName {
+  min-width: 300px;
+}
+
+input[type=number] {
+  width: calc(100% - 8px);
+}
+
+input[type=number].qty {
+  width: 2em;
+  margin-left: 2px;
+}
+
+.value, .mass, .hull, .thrust, .capacity, .power {
+  text-align: right;
+  min-width: 4em;
+}
+
+.thrust {
+  min-width: 7em;
+}
+
+.totals {
+  float: right;
+}
+
+.totals td {
+  text-align: right;
+  min-width: 4em;
+}
+
+.mainTableContainer {
+}
+
+.filters {
+  margin: 0.5em 0;
+}
+
+.good td {
+  background-color: #c0ffc0;
+  color: #006000;
+}
+
+.warn td, td.warn {
+  background-color: #ffc0c0;
+  color: #c00000;
+}
+
+.warn select, .warn input {
+  background-color: #fff0f0;
+  border-color: #ff0000;
+}
+
+.caution {
+  background-color: #ffffc0;
+  color: #202000;
+}
+
+#errorsRow {
+  height: auto;
+  padding: 0;
+}
+
+#errors {
+  text-align: left;
+  text-wrap: wrap;
+  color: #c00000;
+  padding: 4px 4px 4px 1.5em;
+  height: auto;
+  min-height: 0;
+}
+
+#errors.clean {
+  display: none;
+}
+
+ul {
+  margin: 0;
+}

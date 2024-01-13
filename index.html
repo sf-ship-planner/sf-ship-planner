@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Starfield Ship Planner</title>
+<link rel='stylesheet' href='planner.css' />
+</head>
+<body>
+  <table class='totals' cellspacing='1' cellpadding='2'>
+    <thead>
+      <tr>
+        <th colspan='2'>Your Ship</th>
+        <th colspan='2'>Target</th>
+      </tr>
+    </thead>
+    <tr id='targetGravRangeRow'>
+      <th>Grav Range:</th>
+      <td id='gravRange'></td>
+      <td><input id='targetGravRange' type='number' value='27.244' size='2' min='15.000' max='30.000' /></td>
+    </tr>
+    <tr id='targetMobilityRow'>
+      <th>Mobility:</th>
+      <td id='mobility'></td>
+      <td><input id='targetMobility' type='number' value='100' size='2' min='1.000' max='100.000' /></td>
+    </tr>
+    <tr id='speedRow'>
+      <th>Top Speed:</th>
+      <td id='speed'></td>
+      <td>
+        <select id='targetSpeed'>
+          <option>130</option>
+          <option>140</option>
+          <option selected>150</option>
+          <option>180</option>
+        </select>
+      </td>
+    </tr>
+    <tr id='targetMassRow'>
+      <th>Mass:</th>
+      <td id='totalMass'></td>
+      <td id='targetMass'></td>
+    </tr>
+    <tr id='targetJumpRow'>
+      <th>Grav. Thrust:</th>
+      <td id='totalGrav'></td>
+      <td id='targetJump'></td>
+    </tr>
+    <tr id='targetLandingRow'>
+      <th>Landing:</th>
+      <td id='totalLanding'></td>
+      <td id='targetLanding'></td>
+    </tr>
+    <tr id='targetMThrustRow'>
+      <th>M. Thrust:</th>
+      <td id='totalMThrust'></td>
+      <td id='targetMThrust'></td>
+    </tr>
+    <tr>
+      <th>Thrust:</th>
+      <td id='totalThrust'></td>
+    </tr>
+    <tr>
+      <th>Value:</th>
+      <td id='totalValue'></td>
+    </tr>
+    <tr>
+      <th>Hull:</th>
+      <td id='totalHull'></td>
+    </tr>
+    <tr>
+      <th>Power:</th>
+      <td id='totalPower'></td>
+    </tr>
+    <tr>
+      <th>Fuel:</th>
+      <td id='totalFuel'></td>
+    </tr>
+    <tr>
+      <th>Cargo:</th>
+      <td id='totalCargo'></td>
+    </tr>
+    <tr class='subhead'>
+      <th colspan='3'>Errors</th>
+    </tr>
+    <tr>
+      <td colspan='3' id='errorsRow'><ul id='errors' class='clean'></ul></td>
+    </tr>
+  </table>
+  <h1>Starfield Ship Planner</h1>
+  <div class='filters'>
+    <b>Filter by Class:</b>
+    <label for='filterA'><input type='checkbox' id='filterA' checked /> A</label> |
+    <label for='filterB'><input type='checkbox' id='filterB' checked /> B</label> |
+    <label for='filterC'><input type='checkbox' id='filterC' checked /> C</label>
+  </div>
+  <table class='mainTableContainer' cellspacing='1' cellpadding='2'>
+    <thead>
+      <th>Part</th>
+      <th colspan='2'>Name</th>
+      <th>Value</th>
+      <th>Mass</th>
+      <th>Hull</th>
+      <th>Power</th>
+      <th>Thrust</th>
+      <th>Capacity</th>
+    </thead>
+    <tbody id='mainTable'>
+    </tbody>
+  </table>
+  <!--
+  &#x1f50d;
+  &#x1f4cb;
+  &#x24d8;
+  &#x1f6c8;
+  &#x274c;
+  -->
+  <hr />
+  <h3>Credits</h3>
+  Data collected from:
+  <ul>
+    <li><a href='https://inara.cz/starfield/'>Inara Starfield Database</a></li>
+    <li><a href='https://www.reddit.com/r/Starfield/comments/16gqwce/ship_part_list_with_level_requirements_stats/'>Lucid Wolf's Ship Part List</a></li>
+    <li><a href='https://www.reddit.com/r/Starfield/comments/1738yde/ship_planning_made_easier/'>Nebur Wolf's Ship Designer</a></li>
+    <li><a href='https://www.reddit.com/r/Starfield/comments/17bkze8/comprehensive_ship_parts/'>gfntyjzpirqf's Starfield Ship Parts</a></li>
+  </ul>
+</body>
+<script type='module' src='planner.js'></script>
+</body>
+</html>
