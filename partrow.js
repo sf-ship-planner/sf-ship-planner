@@ -1,18 +1,12 @@
-import { allParts, partsByType, fixedParts } from './data.js';
+import { allParts, partsByType, fixedParts, topSpeeds } from './data.js';
 import ui, { H } from './ui.js';
 import partTable from './parttable.js';
+import searchModal from './searchmodal.js';
 
 const upArrow = '<a class="icon up" title="Move Up">&#x2b06;&#xfe0f;</a>';
 const downArrow = '<a class="icon down" title="Move Down">&#x2b07;&#xfe0f;</a>';
 const delButton = '<a class="icon del" title="Delete">&#x274c;</a>';
 const searchButton = '<a class="icon search" title="Search">&#x1f50d;</a>';
-
-const topSpeeds = {
-  'White Dwarf 3015': 180,
-  A: 150,
-  B: 140,
-  C: 130,
-};
 
 export default class PartRow {
   constructor(partType = null) {
@@ -46,17 +40,17 @@ export default class PartRow {
     }
 
     const icons = H({ tag: 'td', className: 'icons' });
-    this._info = H({ tag: 'a', className: 'icon', title: 'Part Info' }, '\u{1f6c8}'),
+    this._info = H({ tag: 'a', className: 'icon info', title: 'Part Info' }, '\u{1f6c8}'),
     icons.addEventListener('click', this._onIconClicked);
     this._info.addEventListener('click', this._onIconClicked);
-    this.nameCell = H({ tag: 'td', className: 'partName' }, [ select, this._info ]);
+    this.nameCell = H({ tag: 'td', className: 'partName' }, [ select, /*this._info*/ ]);
 
     const cells = [ icons, H('th', partHeader), this.nameCell ];
     if (fixedParts.includes(partType)) {
-      icons.innerHTML = searchButton;
+      //icons.innerHTML = searchButton;
       this.nameCell.colSpan = 2;
     } else {
-      icons.innerHTML = upArrow + downArrow + delButton + searchButton;
+      icons.innerHTML = upArrow + downArrow + delButton /* + searchButton */;
       this._qty = H({
         tag: 'input',
         type: 'number',
@@ -76,8 +70,8 @@ export default class PartRow {
       this._capacity = H({ tag: 'td', className: 'capacity' }),
     )
 
-    this._fillNames();
     this.row = H('tr', cells);
+    this._fillNames();
     ui.mainTable.appendChild(this.row);
     this._init = true;
     this.errors = [];
@@ -134,6 +128,9 @@ export default class PartRow {
     let value = this.part[field];
     if (typeof value === 'number') {
       value *= this.quantity;
+    }
+    if (field === 'value') {
+      value = Math.ceil(value * (1.0 - (Number(ui.discount.value) * .01)));
     }
     return value;
   }
@@ -198,6 +195,8 @@ export default class PartRow {
     this._updateField('capacity', data.fuel || data.cargo);
     this._updateField('thrust', thrust);
 
+    this.row.classList.toggle('noSearch', !this.partType);
+
     if (this._init) {
       partTable.update();
     }
@@ -213,6 +212,22 @@ export default class PartRow {
       case 'up': return partTable.moveRowUp(this);
       case 'down': return partTable.moveRowDown(this);
       case 'del': return partTable.deleteRow(this);
+      case 'search': return this.showSearch();
+      case 'info': return this.showInfo();
     }
+  }
+
+  showSearch() {
+    if (!this.partType) {
+      return;
+    }
+    searchModal.show(this);
+  }
+
+  showInfo() {
+    if (!this.partName) {
+      return;
+    }
+    infoModal.show(this);
   }
 }

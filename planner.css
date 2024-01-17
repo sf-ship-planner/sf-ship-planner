@@ -12,6 +12,9 @@ table {
 
 td, th {
   background-color: #ffffff;
+}
+
+#baseView td, th {
   height: 22px;
   text-wrap: nowrap;
 }
@@ -54,7 +57,7 @@ input#filterDesign, input#filterPiloting {
   width: 2em;
 }
 
-input#filterLevel {
+input#filterLevel, input#discount, input#jumpBonus {
   width: 3em;
 }
 
@@ -146,7 +149,31 @@ a.icon {
 
 tr:nth-of-type(7) a.icon.up,
 tr:nth-last-of-type(2) a.icon.down,
-tr:last-of-type .icons a.icon {
+tr:last-of-type .icons a.icon:not(.search),
+tr.noSearch a.icon.search
+{
   visibility: hidden;
   cursor: auto;
+}
+
+#modalBase {
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, .5);
+  justify-content: center;
+  align-items: center;
+}
+
+#modalBase > div {
+  background: white;
+  border: 1px solid black;
+  padding: 1em;
+}
+
+h2 {
+  margin-top: 0;
 }

@@ -5,6 +5,7 @@
 <link rel='stylesheet' href='planner.css' />
 </head>
 <body>
+<div id='baseView'>
   <table class='totals' cellspacing='1' cellpadding='2'>
     <thead>
       <tr>
@@ -99,6 +100,13 @@
     <b>Filter by Level:</b>
     <input id='filterLevel' type='number' min='1' value='60' />
   </div>
+  <div class='filters'>
+    <b>Discount:</b>
+    <input id='discount' type='number' min='1' max='85' value='0' />%
+    &bull;
+    <b>Grav Range Bonus:</b>
+    <input id='jumpBonus' type='number' min='0' value='0' />%
+  </div>
   <table class='mainTableContainer' cellspacing='1' cellpadding='2'>
     <thead>
       <th></th>
@@ -123,6 +131,18 @@
     <li><a href='https://www.reddit.com/r/Starfield/comments/17bkze8/comprehensive_ship_parts/'>gfntyjzpirqf's Starfield Ship Parts</a></li>
     <li><a href='https://inara.cz/starfield/'>Inara Starfield Database</a></li>
   </ul>
+  <br/>
+  <a href='https://github.com/sf-ship-planner/sf-ship-planner'>Starfield Ship Planner is open-source</a>.
+  Copyright &copy; 2024 Adam Higerd (<a href='https://reddit.com/u/codahighland'>u/codahighland</a>)
+  <br/>
+  <br/>
+  Starfield is the property of Bethesda.
+</div>
+<div id='modalBase' style='display:none'>
+  <div id='searchModal'>
+    <h2><span data-key='partType'></span> Search</h2>
+  </div>
+</div>
 </body>
 <script type='module' src='planner.js'></script>
 </body>

@@ -39,6 +39,7 @@ class PartTable {
     ui.targetGravRange.addEventListener('change', this.update);
     ui.targetSpeed.addEventListener('change', this.update);
     ui.targetMobility.addEventListener('change', this.update);
+    ui.jumpBonus.addEventListener('change', this.update);
 
     this.updateFilters = this.updateFilters.bind(this, null);
     ui.filterA.addEventListener('click', this.updateFilters);
@@ -47,6 +48,9 @@ class PartTable {
     ui.filterLevel.addEventListener('change', this.updateFilters);
     ui.filterDesign.addEventListener('change', this.updateFilters);
     ui.filterPiloting.addEventListener('change', this.updateFilters);
+
+    this.updateValue = this.updateValue.bind(this, null);
+    ui.discount.addEventListener('change', this.updateValue);
   }
 
   init() {
@@ -294,6 +298,15 @@ class PartTable {
         }
       }
     }
+  }
+
+  updateValue() {
+    let totalValue = 0;
+    for (const row of this.rows) {
+      row._updateField('value');
+      totalValue += row.getValue('value') || 0;
+    }
+    ui.totalValue.innerText = Math.ceil(totalValue);
   }
 }
 
